@@ -6,6 +6,7 @@ from forms.login import LoginForm
 from forms.crot import NewsForm
 from forms.user import RegisterForm
 from flask_login import LoginManager, login_user, login_required, current_user
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -117,7 +118,9 @@ def edit_news(id):
 
 def main():
     db_session.global_init("db/blogs.db")
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+
 
 
 if __name__ == '__main__':
